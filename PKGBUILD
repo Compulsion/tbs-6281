@@ -1,5 +1,5 @@
 pkgname=tbs-6281
-pkgver=4.4.5
+pkgver=5.1.4
 pkgrel=1
 pkgdesc="TBS6281 Driver"
 url="https://github.com/ljalves/linux_media/wiki"
@@ -16,13 +16,10 @@ source=('dvb-demod-si2168-b40-01.fw'
 md5sums=('8dfc2483d90282bbb05817fbbc282376'
 	 '0cba7ce61c1411cbe7f22c0746e24e33')
 
-_kernmajor="$(pacman -Q linux | sed -r 's/linux ([0-9]*.[0-9]*).*/\1/')"
-_kernver="$(</usr/lib/modules/extramodules-"$_kernmajor"-ARCH/version)"
-
 pkgver() {
 
 	_kernel=`uname -r | sed -r 's/-/_/g'`
-	echo "$_kernel"
+	echo "$pkgver"
 }
 
 package() {
@@ -33,8 +30,8 @@ package() {
 	msg "Compressing modules, this will take awhile..."
 	echo ""
 
-	install -Dm644 "$startdir"/drivers/media/pci/saa716x/saa716x_core.ko "$pkgdir"/usr/lib/modules/extramodules-"$_kernmajor"-ARCH/saa716x_core.ko
-	gzip "$pkgdir"/usr/lib/modules/extramodules-"$_kernmajor"-ARCH/saa716x_core.ko
-	install -Dm644 "$startdir"/drivers/media/pci/saa716x/saa716x_budget.ko "$pkgdir"/usr/lib/modules/extramodules-"$_kernmajor"-ARCH/saa716x_budget.ko
-	gzip "$pkgdir"/usr/lib/modules/extramodules-"$_kernmajor"-ARCH/saa716x_budget.ko
+	install -Dm644 "$startdir"/drivers/media/pci/saa716x/saa716x_core.ko "$pkgdir"/usr/lib/modules/extramodules-ARCH/saa716x_core.ko
+	gzip "$pkgdir"/usr/lib/modules/extramodules-ARCH/saa716x_core.ko
+	install -Dm644 "$startdir"/drivers/media/pci/saa716x/saa716x_budget.ko "$pkgdir"/usr/lib/modules/extramodules-ARCH/saa716x_budget.ko
+	gzip "$pkgdir"/usr/lib/modules/extramodules-ARCH/saa716x_budget.ko
 }
